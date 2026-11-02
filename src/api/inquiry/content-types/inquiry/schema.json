@@ -39,6 +39,7 @@
       "type": "media",
       "multiple": false,
       "allowedTypes": [
+        "files",
         "images"
       ]
     },

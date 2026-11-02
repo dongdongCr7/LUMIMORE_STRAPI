@@ -244,6 +244,12 @@
       "relation": "oneToOne",
       "target": "api::technology-page.technology-page",
       "mappedBy": "siteSetting"
+    },
+    "customPages": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::custom-page.custom-page",
+      "mappedBy": "siteSetting"
     }
   }
 }

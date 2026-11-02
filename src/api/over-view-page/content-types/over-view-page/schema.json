@@ -72,7 +72,8 @@
         "shared.tag-item",
         "shared.option-item",
         "shared.option-item-list",
-        "shared.btn"
+        "shared.btn",
+        "shared.label-item-list"
       ]
     },
     "categories": {

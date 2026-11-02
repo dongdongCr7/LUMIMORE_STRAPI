@@ -637,6 +637,12 @@ export interface ApiApplicationApplication extends Struct.CollectionTypeSchema {
       'manyToMany',
       'api::application.application'
     >;
+    seo: Schema.Attribute.Component<'shared.seo-meta', false> &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
     siteSetting: Schema.Attribute.Relation<'manyToOne', 'api::site.site'>;
     slug: Schema.Attribute.UID<'applicationName'>;
     tags: Schema.Attribute.Component<'shared.tag-item', true> &
@@ -886,6 +892,48 @@ export interface ApiContactPageContactPage extends Struct.CollectionTypeSchema {
   };
 }
 
+export interface ApiCustomPageCustomPage extends Struct.CollectionTypeSchema {
+  collectionName: 'custom_pages';
+  info: {
+    displayName: 'CustomPage';
+    pluralName: 'custom-pages';
+    singularName: 'custom-page';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    com: Schema.Attribute.DynamicZone<
+      [
+        'shared.text-item',
+        'shared.tag-item',
+        'shared.text-item-list',
+        'shared.btn',
+        'shared.label-item-list',
+        'shared.option-item',
+        'shared.info-item-list',
+        'shared.option-item-list',
+      ]
+    >;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    hero: Schema.Attribute.Component<'shared.hero', false>;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::custom-page.custom-page'
+    > &
+      Schema.Attribute.Private;
+    publishedAt: Schema.Attribute.DateTime;
+    seo: Schema.Attribute.Component<'shared.seo-meta', false>;
+    siteSetting: Schema.Attribute.Relation<'manyToOne', 'api::site.site'>;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
 export interface ApiDownloadDownload extends Struct.CollectionTypeSchema {
   collectionName: 'downloads';
   info: {
@@ -939,7 +987,7 @@ export interface ApiInquiryInquiry extends Struct.CollectionTypeSchema {
     draftAndPublish: true;
   };
   attributes: {
-    attachment: Schema.Attribute.Media<'images'>;
+    attachment: Schema.Attribute.Media<'files' | 'images'>;
     companyName: Schema.Attribute.String;
     country: Schema.Attribute.String;
     createdAt: Schema.Attribute.DateTime;
@@ -991,6 +1039,7 @@ export interface ApiOverViewPageOverViewPage
         'shared.option-item',
         'shared.option-item-list',
         'shared.btn',
+        'shared.label-item-list',
       ]
     > &
       Schema.Attribute.SetPluginOptions<{
@@ -1348,6 +1397,10 @@ export interface ApiSiteSite extends Struct.CollectionTypeSchema {
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
+    customPages: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::custom-page.custom-page'
+    >;
     favicon: Schema.Attribute.Media<'images'> &
       Schema.Attribute.SetPluginOptions<{
         i18n: {
@@ -1510,6 +1563,7 @@ export interface ApiTechnologyPageTechnologyPage
         'shared.spec-row-item',
         'shared.tech-section',
         'shared.spec-row-item-list',
+        'shared.btn',
       ]
     > &
       Schema.Attribute.SetPluginOptions<{
@@ -2067,6 +2121,7 @@ declare module '@strapi/strapi' {
       'api::category.category': ApiCategoryCategory;
       'api::certification.certification': ApiCertificationCertification;
       'api::contact-page.contact-page': ApiContactPageContactPage;
+      'api::custom-page.custom-page': ApiCustomPageCustomPage;
       'api::download.download': ApiDownloadDownload;
       'api::inquiry.inquiry': ApiInquiryInquiry;
       'api::over-view-page.over-view-page': ApiOverViewPageOverViewPage;

@@ -150,6 +150,16 @@
       "relation": "manyToOne",
       "target": "api::technology-page.technology-page",
       "inversedBy": "applications"
+    },
+    "seo": {
+      "type": "component",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "component": "shared.seo-meta",
+      "repeatable": false
     }
   }
 }

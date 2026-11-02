@@ -52,7 +52,8 @@
         "shared.label-item-list",
         "shared.spec-row-item",
         "shared.tech-section",
-        "shared.spec-row-item-list"
+        "shared.spec-row-item-list",
+        "shared.btn"
       ]
     },
     "applications": {
